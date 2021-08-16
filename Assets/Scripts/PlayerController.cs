@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     CharacterController character;
     [SerializeField] float playerSpeed;
     [SerializeField] float rotateSpeed;
+    [SerializeField] float backSpeed;
     Animator anim;
     // Start is called before the first frame update
     void Start()
@@ -18,12 +19,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Score.instance.Increment();
         var horizotal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
         var movement = new Vector3(horizotal, 0, vertical);
-        character.SimpleMove(movement * Time.deltaTime * playerSpeed);
-        anim.SetFloat("Speed", movement.magnitude);
-        Quaternion direction = Quaternion.LookRotation(movement);
-        transform.rotation = Quaternion.Slerp(transform.rotation, direction, Time.deltaTime * rotateSpeed) ;
+        anim.SetFloat("Speed", vertical);
+        transform.Rotate(Vector3.up, horizotal * rotateSpeed * Time.deltaTime);
+        if (vertical != 0)
+        {
+            float moveSpeed = (vertical > 0) ? playerSpeed : backSpeed;
+            character.SimpleMove(transform.forward * vertical * moveSpeed);
+        }
     }
 }
