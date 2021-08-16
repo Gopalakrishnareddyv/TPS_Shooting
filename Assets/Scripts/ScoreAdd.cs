@@ -7,7 +7,7 @@ public class ScoreAdd : MonoBehaviour
 {
     [SerializeField] Text scoreText;
     // Start is called before the first frame update
-    public void ScoreUpdate()
+    public void Update()
     {
         scoreText.text = "Score : " + Score.instance.lastScore;
     }

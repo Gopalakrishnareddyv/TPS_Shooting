@@ -10,10 +10,12 @@ public class GunController : MonoBehaviour
     float timer = 0;
     [SerializeField] Transform firePoint;
     [SerializeField] ParticleSystem particle;
+    AudioSource audioSource;
+    [SerializeField] AudioClip audioClip;
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -24,6 +26,8 @@ public class GunController : MonoBehaviour
         {
             if (Input.GetMouseButton(0))
             {
+                audioSource.clip = audioClip;
+                audioSource.Play();
                 particle.Play();
                 timer = 0;
                 FireGun();

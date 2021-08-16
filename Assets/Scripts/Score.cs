@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    float score = 0;
+    float score = 200;
     [SerializeField]Text scoreText;
     public  float lastScore;
     public static Score instance;
@@ -16,7 +16,7 @@ public class Score : MonoBehaviour
     }
     public void Increment()
     {
-        score +=Time.deltaTime;
+        score -=Time.deltaTime;
         scoreText.text = "Score : " +Mathf.Round( score);
         lastScore =Mathf.Round( score);
     }
