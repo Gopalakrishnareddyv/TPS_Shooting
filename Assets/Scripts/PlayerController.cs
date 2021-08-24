@@ -1,20 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     CharacterController character;
     [SerializeField] float playerSpeed;
     [SerializeField] float rotateSpeed;
-    [SerializeField] float backSpeed;
+    [SerializeField] float jumpSpeed;
     Animator anim;
-   
+    Helicopter helicopter;
     // Start is called before the first frame update
     void Start()
     {
+        helicopter = GameObject.Find("Plane").GetComponent<Helicopter>();
         character = GetComponent<CharacterController>();
         anim=GetComponentInChildren<Animator>();
+        helicopter.Landing();
     }
 
     // Update is called once per frame
@@ -28,8 +31,14 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(Vector3.up, horizotal * rotateSpeed * Time.deltaTime);
         if (vertical != 0)
         {
-            float moveSpeed = (vertical > 0) ? playerSpeed : backSpeed;
-            character.SimpleMove(transform.forward * vertical * moveSpeed);
+            
+            character.SimpleMove(transform.forward * vertical * playerSpeed);
         }
+        
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
     }
 }

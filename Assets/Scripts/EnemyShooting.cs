@@ -11,6 +11,7 @@ public class EnemyShooting : MonoBehaviour
     private float attackTimer;
     [SerializeField]
     private float attackRefreshRate=1f;
+   
 
     private void Awake()
     {

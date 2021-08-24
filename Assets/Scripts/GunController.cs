@@ -10,6 +10,9 @@ public class GunController : MonoBehaviour
     float timer = 0;
     [SerializeField] Transform firePoint;
     [SerializeField] ParticleSystem particle;
+    [SerializeField] GameObject hiteffect;
+    //[SerializeField] GameObject part;ticlePrefab;
+
     AudioSource audioSource;
     [SerializeField] AudioClip audioClip;
     // Start is called before the first frame update
@@ -44,6 +47,14 @@ public class GunController : MonoBehaviour
         if(Physics.Raycast(ray,out hit, 100))
         {
             var health = hit.collider.gameObject.GetComponent<Health>();
+            if (hit.collider.gameObject.tag == "Enemy")
+            {
+                //Debug.Log(hit.collider.gameObject.name);
+                Instantiate(hiteffect,hit.collider.gameObject.transform.position+new Vector3(0f,1.3f,0.2f), Quaternion.identity);
+
+            }
+
+            //Instantiate(particlePrefab,hit.collider.transform.position,Quaternion.identity);
             if (health != null)
             {
                 health.Damage(1);

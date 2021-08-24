@@ -5,15 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class WinningScript : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    [SerializeField] Transform helicopter;
+    [SerializeField] Transform[] landingPoints;
+    private void Start()
     {
-        if (other.gameObject.name == "Player")
+        int point = Random.Range(0, landingPoints.Length);
+        helicopter.transform.position = landingPoints[point].transform.position;
+        
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
-        else
-        {
-            Debug.Log("khsvakncfhihfao");
-        }
     }
+    
 }

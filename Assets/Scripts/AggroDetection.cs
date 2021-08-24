@@ -12,7 +12,7 @@ public class AggroDetection : MonoBehaviour
         var player = other.GetComponent<PlayerController>();
         if (player != null)
         {
-            //Debug.Log("Aggro detector");
+            
             OnAggro(player.transform);
         }
     }

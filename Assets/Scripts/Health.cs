@@ -7,7 +7,6 @@ public class Health : MonoBehaviour
 {
     int startingHealth = 5;
     int currentHealth;
-    int enemyCount;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,12 +24,6 @@ public class Health : MonoBehaviour
             else
             {
                 this.gameObject.SetActive(false);
-                enemyCount++;
-                if (enemyCount > 3)
-                {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                }
-
             }
         }
     }
